@@ -3,162 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>绿色倡议 - 保护我们的地球</title>
+    <title>守护可爱生灵 - 动物保护行动</title>
+    <meta name="description" content="加入我们，一起保护地球上可爱的动物朋友们。">
     
     <style>
+        /* --- 基础设置 & 暗黑模式支持 --- */
         :root {
-            /* 浅色模式 (默认) */
-            --bg-color: #f9f9f9;
-            --text-color: #333;
-            --container-bg: #ffffff;
-            --primary-color: #00796b; /* 环保绿色 */
-            --secondary-color: #e0f2f1;
-            --shadow-color: rgba(0, 0, 0, 0.05);
+            --bg-color: #f0f4f8;
+            --text-color: #2d3748;
+            --card-bg: #ffffff;
+            --primary-color: #38a169; /* 自然绿 */
+            --secondary-color: #c6f6d5;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         @media (prefers-color-scheme: dark) {
-            /* 暗黑模式 (自动切换) */
             :root {
-                --bg-color: #121212;
-                --text-color: #e0e0e0;
-                --container-bg: #1e1e1e;
-                --primary-color: #4db6ac; /* 稍亮的绿色 */
-                --secondary-color: #263238;
-                --shadow-color: rgba(0, 0, 0, 0.2);
+                --bg-color: #1a202c;
+                --text-color: #e2e8f0;
+                --card-bg: #2d3748;
+                --primary-color: #48bb78;
+                --secondary-color: #2f855a;
+                --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
             }
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            /* 使用系统字体，环保且加载快 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 25px 30px;
-            background-color: var(--container-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: background-color 0.3s;
-        }
-
-        header {
+        /* --- 顶部 Hero Header --- */
+        .hero-header {
+            position: relative;
+            /* 首图：一只可爱的小熊猫。
+               使用了 Unsplash 的动态 API 进行优化：
+               w=1600 (限制最大宽度)
+               q=75 (稍微降低质量以减小体积)
+               fm=webp (强制使用 WebP 高效格式)
+            */
+            background-image: url('https://images.unsplash.com/photo-1544552866-d3ed42536cfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=75&fm=webp');
+            background-size: cover;
+            background-position: center center;
+            height: 50vh; /* 占据屏幕高度的 50% */
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            color: white;
         }
 
-        header h1 {
+        /* 黑色遮罩，让文字更清晰 */
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- 主体内容容器 --- */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section h2 {
+            text-align: center;
             color: var(--primary-color);
-            margin: 0;
-            font-size: 2.2em;
+            font-size: 2rem;
+            margin-bottom: 30px;
         }
         
-        /* 使用内联SVG图标，避免加载图片文件 */
-        .leaf-icon {
-            width: 28px;
-            height: 28px;
-            fill: var(--primary-color);
-            vertical-align: middle;
-            margin-right: 8px;
+        .intro-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            font-size: 1.1rem;
         }
 
-        h2 {
+        /* --- 动物卡片网格布局 --- */
+        .animal-grid {
+            display: grid;
+            /* 响应式网格：在小屏幕上单列，大屏幕上三列 */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .animal-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden; /* 确保图片圆角 */
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px); /* 鼠标悬停轻微上浮效果 */
+        }
+
+        /* 卡片图片样式 */
+        .animal-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover; /* 保证图片填充且不变形 */
+            display: block;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            margin-top: 0;
             color: var(--primary-color);
-            border-bottom: 1px solid var(--secondary-color);
-            padding-bottom: 5px;
         }
 
-        .tips-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .tips-list li {
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        /* 用CSS创建列表符号，而不是图片 */
-        .tips-list li::before {
-            content: '♻️'; /* 或者 '✔️' '🌱' */
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 20px;
-        }
-
+        /* --- 底部 --- */
         footer {
             text-align: center;
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #888;
+            padding: 30px 20px;
+            margin-top: 60px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
         }
-
-        .low-carbon-note {
-            font-style: italic;
+        
+        .eco-badge {
+             display: inline-block;
+             margin-top: 10px;
+             font-size: 0.85em;
+             opacity: 0.8;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <header>
-            <h1>
-                <svg class="leaf-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-8a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-4zm-1-3a1 1 0 0 1 1.7-.7l4 4a1 1 0 0 1-1.4 1.4L10 9.4l-2.3 2.3a1 1 0 0 1-1.4-1.4l4-4z"/>
-                </svg>
-                我们的绿色倡议
-            </h1>
-        </header>
+    <header class="hero-header">
+        <div class="hero-content">
+            <h1>守护它们的微笑</h1>
+            <p>因为可爱，所以珍惜；因为脆弱，所以保护。</p>
+        </div>
+    </header>
 
-        <main>
-            <section id="intro">
-                <h2>欢迎加入！</h2>
-                <p>我们相信，每一个微小的行动都能对地球产生积极的影响。这个网页本身就是一次实践——它被设计得极其轻量和高效，以减少数据传输和处理所需的能源。</p>
-            </section>
+    <main class="container">
+        <section>
+            <p class="intro-text">
+                地球不仅属于人类，也属于这些神奇可爱的生灵。它们的存在让世界变得丰富多彩。
+                <br>
+                然而，由于栖息地丧失和气候变化，许多小可爱正面临威胁。让我们行动起来，为它们保留一片生存空间。
+            </p>
+        </section>
 
-            <section id="tips">
-                <h2>我的环保行动清单</h2>
-                <ul class="tips-list">
-                    <li><strong>节约能源：</strong> 随手关灯，使用节能电器，减少空调使用时间。</li>
-                    <li><strong>减少浪费 (3R)：</strong> 减少(Reduce)、重用(Reuse)、回收(Recycle)。尽量不使用一次性用品。</li>
-                    <li><strong>绿色出行：</strong> 优先选择步行、骑自行车或公共交通工具。</li>
-                    <li><strong>选择可持续产品：</strong> 购买本地、应季的食物，选择包装简约的商品。</li>
-                    <li><strong>节约用水：</strong> 修复滴漏，缩短淋浴时间。</li>
-                </ul>
-            </section>
+        <section>
+            <h2>遇见需要守护的朋友</h2>
+            <div class="animal-grid">
+                
+                <div class="animal-card">
+                    <img 
+                        src="https://images.unsplash.com/photo-1437622645530-70953244f325?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75&fm=webp" 
+                        alt="一只在海洋中游弋的海龟"
+                        loading="lazy"
+                        width="600"
+                        height="400"
+                    >
+                    <div class="card-content">
+                        <h3>海洋精灵：海龟</h3>
+                        <p>它们在海洋中畅游了数百万年，如今却深受塑料污染的威胁。减少使用塑料制品，就是给它们最好的礼物。</p>
+                    </div>
+                </div>
 
-            <section id="about-site">
-                <h2>关于这个网站</h2>
-                <p class="low-carbon-note">
-                    为了保护环境，这个页面：
-                    <br>
-                    1. 不加载任何外部图片或字体文件。
-                    <br>
-                    2. 代码被压缩至最小。
-                    <br>
-                    3. 自动适应您设备的暗黑模式以节省电量。
-                </p>
-            </section>
-        </main>
+                <div class="animal-card">
+                    <img 
+                        src="https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75&fm=webp" 
+                        alt="雪地里可爱的北极狐"
+                        loading="lazy"
+                        width="600"
+                        height="400"
+                    >
+                    <div class="card-content">
+                        <h3>雪原行者：北极狐</h3>
+                        <p>气候变暖导致北极冰川融化，它们的家园正在缩小。关注气候变化，实践低碳生活，为了这些雪白的小生命。</p>
+                    </div>
+                </div>
 
-        <footer>
-            <p>&copy; 2025 地球守护者联盟</p>
-        </footer>
-
-    </div>
-
-</body>
-</html>
+                <div class="animal-card">
+                    <img 
+                        src="
