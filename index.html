@@ -3,208 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>守护可爱生灵 - 动物保护行动</title>
-    <meta name="description" content="加入我们，一起保护地球上可爱的动物朋友们。">
-    
+    <title>连接未来 | 个人隐私反代中心</title>
     <style>
-        /* --- 基础设置 & 暗黑模式支持 --- */
         :root {
-            --bg-color: #f0f4f8;
-            --text-color: #2d3748;
-            --card-bg: #ffffff;
-            --primary-color: #38a169; /* 自然绿 */
-            --secondary-color: #c6f6d5;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a202c;
-                --text-color: #e2e8f0;
-                --card-bg: #2d3748;
-                --primary-color: #48bb78;
-                --secondary-color: #2f855a;
-                --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            }
+            --primary-green: #2d6a4f;
+            --light-green: #d8f3dc;
+            --accent-color: #52b788;
         }
 
         body {
-            /* 使用系统字体，环保且加载快 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* --- 顶部 Hero Header --- */
-        .hero-header {
-            position: relative;
-            /* 首图：一只可爱的小熊猫。
-               使用了 Unsplash 的动态 API 进行优化：
-               w=1600 (限制最大宽度)
-               q=75 (稍微降低质量以减小体积)
-               fm=webp (强制使用 WebP 高效格式)
-            */
-            background-image: url('https://images.unsplash.com/photo-1544552866-d3ed42536cfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=75&fm=webp');
-            background-size: cover;
-            background-position: center center;
-            height: 50vh; /* 占据屏幕高度的 50% */
-            min-height: 300px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-green);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: var(--primary-green);
+        }
+
+        .container {
             text-align: center;
-            color: white;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
         }
 
-        /* 黑色遮罩，让文字更清晰 */
-        .hero-header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+        .icon-box {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        /* 模拟牵手/连接的动画 */
+        .hand {
+            animation: pulse 2s infinite;
         }
 
-        .hero-content h1 {
-            font-size: 2.5rem;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 24px;
             margin-bottom: 10px;
         }
 
-        /* --- 主体内容容器 --- */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
         }
 
-        section h2 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 30px;
-        }
-        
-        .intro-text {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 50px auto;
-            font-size: 1.1rem;
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s;
+            font-weight: bold;
         }
 
-        /* --- 动物卡片网格布局 --- */
-        .animal-grid {
-            display: grid;
-            /* 响应式网格：在小屏幕上单列，大屏幕上三列 */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+        .btn:hover {
+            background-color: var(--accent-color);
         }
 
-        .animal-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden; /* 确保图片圆角 */
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
         }
-
-        .animal-card:hover {
-            transform: translateY(-5px); /* 鼠标悬停轻微上浮效果 */
-        }
-
-        /* 卡片图片样式 */
-        .animal-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover; /* 保证图片填充且不变形 */
-            display: block;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-
-        /* --- 底部 --- */
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .eco-badge {
-             display: inline-block;
-             margin-top: 10px;
-             font-size: 0.85em;
-             opacity: 0.8;
-        }
-
     </style>
 </head>
 <body>
 
-    <header class="hero-header">
-        <div class="hero-content">
-            <h1>守护它们的微笑</h1>
-            <p>因为可爱，所以珍惜；因为脆弱，所以保护。</p>
-        </div>
-    </header>
+<div class="container">
+    <div class="icon-box">
+        <span class="hand">🤝</span>
+        <span>🌿</span>
+    </div>
+    <h1>安全连接 · 绿色网络</h1>
+    <p>这是您的私有反代网关。<br>数据正如自然界的循环，<br>每一次连接都应获得呼吸般的自由与安全。</p>
+    
+    <!-- 这里可以改成你实际要跳转的内部服务地址 -->
+    <a href="/admin" class="btn">进入管理后台</a>
 
-    <main class="container">
-        <section>
-            <p class="intro-text">
-                地球不仅属于人类，也属于这些神奇可爱的生灵。它们的存在让世界变得丰富多彩。
-                <br>
-                然而，由于栖息地丧失和气候变化，许多小可爱正面临威胁。让我们行动起来，为它们保留一片生存空间。
-            </p>
-        </section>
+    <div class="footer">
+        © 2024 私人反代节点 · 守护数据纯净
+    </div>
+</div>
 
-        <section>
-            <h2>遇见需要守护的朋友</h2>
-            <div class="animal-grid">
-                
-                <div class="animal-card">
-                    <img 
-                        src="https://images.unsplash.com/photo-1437622645530-70953244f325?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75&fm=webp" 
-                        alt="一只在海洋中游弋的海龟"
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                    >
-                    <div class="card-content">
-                        <h3>海洋精灵：海龟</h3>
-                        <p>它们在海洋中畅游了数百万年，如今却深受塑料污染的威胁。减少使用塑料制品，就是给它们最好的礼物。</p>
-                    </div>
-                </div>
-
-                <div class="animal-card">
-                    <img 
-                        src="https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75&fm=webp" 
-                        alt="雪地里可爱的北极狐"
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                    >
-                    <div class="card-content">
-                        <h3>雪原行者：北极狐</h3>
-                        <p>气候变暖导致北极冰川融化，它们的家园正在缩小。关注气候变化，实践低碳生活，为了这些雪白的小生命。</p>
-                    </div>
-                </div>
-
-                <div class="animal-card">
-                    <img 
-                        src="
+</body>
+</html>
